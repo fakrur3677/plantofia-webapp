@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plant Entry - Plant Diary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-dark: #26422f;
+      --green-light: #62826b;
+      --cream: #eff1d9;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--green-light);
+      color: var(--white);
+    }
+
+    header {
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    nav a[href="plant-diary.html"] {
+      font-weight: 800;
+      border-bottom: 2px solid var(--white);
+    }
+
+    .container {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .plant-section {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .plant-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 16px;
+      text-align: center;
+      width: 150px;
+    }
+
+    .plant-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+    }
+
+    .plant-card p {
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .log-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .log-entry {
+      background-color: var(--cream);
+      color: var(--green-dark);
+      border-radius: 16px;
+      padding: 1rem 1.5rem;
+    }
+
+    .log-entry h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+    }
+
+    .log-entry p {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="we-care.html">We Care</a>
+      <a href="forum.html">Forum Komuniti</a>
+      <a href="plant-diary.html">Plant Diary</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="plant-section">
+      <div class="plant-card">
+        <img src="placeholder.jpg" alt="Plant Image" />
+        <p class="plant-name">Nama Tumbuhan</p>
+      </div>
+    </div>
+
+    <div class="log-list">
+      <div class="log-entry">
+        <h4>Today</h4>
+        <p><strong>Aktiviti:</strong> Menyiram pokok dengan 200ml air.</p>
+        <p><strong>Pemerhatian:</strong> Daun baru mula tumbuh.</p>
+        <p><strong>Nota:</strong> Tanah masih lembap, jangan siram berlebihan.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const plant = params.get('plant');
+
+    const plantCardImg = document.querySelector('.plant-card img');
+    const plantCardName = document.querySelector('.plant-name');
+
+    const plantInfo = {
+      monstera: {
+        name: 'Monstera',
+        image: 'monstera.jpg'
+      },
+      deliciosa: {
+        name: 'Deliciosa',
+        image: 'deliciosa.jpg'
+      },
+      sansevieria: {
+        name: 'Sansevieria Plant',
+        image: 'sansevieria.jpg'
+      }
+    };
+
+    if (plant && plantInfo[plant]) {
+      plantCardImg.src = plantInfo[plant].image;
+      plantCardImg.alt = plantInfo[plant].name;
+      plantCardName.textContent = plantInfo[plant].name;
+    }
+  </script>
+
+</body>
+</html>

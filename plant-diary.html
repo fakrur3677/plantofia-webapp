@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plant Diary - Plantofia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green-dark: #26422f;
+      --green-light: #62826b;
+      --cream: #eff1d9;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--green-light);
+      color: var(--white);
+    }
+
+    header {
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    nav a[href="plant-diary.html"] {
+      font-weight: 800;
+      border-bottom: 2px solid var(--white);
+    }
+
+    .container {
+      padding: 2rem;
+    }
+
+    .search-bar input {
+      padding: 0.7rem 1rem;
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
+      border: 2px solid var(--white);
+      background-color: transparent;
+      color: var(--white);
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .plants-grid {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .plant-card {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 1rem;
+      text-align: center;
+      width: 160px;
+      text-decoration: none;
+      color: var(--white);
+      transition: transform 0.2s ease;
+    }
+
+    .plant-card:hover {
+      transform: scale(1.05);
+    }
+
+    .plant-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+    }
+
+    .plant-card p {
+      font-weight: 600;
+    }
+    .add-plant-btn {
+  margin-top: 2rem;
+  padding: 0.8rem 1.2rem;
+  background-color: var(--green-dark);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.add-plant-btn:hover {
+  background-color: #1e3528;
+}
+
+.plus-icon {
+  background-color: var(--cream);
+  color: var(--green-dark);
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 0.1rem 0.5rem;
+}
+.plant-info-search {
+  margin: 2rem 0 1rem;
+}
+
+.plant-info-search input {
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  max-width: 300px;
+  width: 100%;
+  background-color: var(--white);
+  color: var(--green-dark);
+}
+
+.plant-info-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 2rem;
+  color: var(--white);
+}
+
+.plant-info-title {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.plant-info-subtitle {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.plant-info-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.plant-info-grid img {
+  width: 200px;
+  border-radius: 12px;
+  background-color: white;
+}
+
+.plant-info-desc {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="we-care.html">We Care</a>
+      <a href="forum.html">Forum Komuniti</a>
+      <a href="plant-diary.html">Plant Diary</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Plant Diary</h1>
+
+   <!-- Carian Informasi Tumbuhan -->
+<div class="plant-info-search">
+    <input
+      type="text"
+      id="plantSearch"
+      placeholder="Contoh: Pokok bunga raya"
+      oninput="searchPlantInfo()" />
+  </div>
+  
+  <div id="plantInfo" class="plant-info-box" style="display: none;">
+    <h2 class="plant-info-title">FAKTA MENARIK</h2>
+    <p class="plant-info-subtitle">
+      Bunga Raya ialah bunga kebangsaan Malaysia. Ia melambangkan keindahan dan kesucian dengan bunga besar berwarna merah, kuning, atau putih.
+    </p>
+  
+    <div class="plant-info-grid">
+      <img src="bungaraya.jpg" alt="Bunga Raya" />
+      <div class="plant-info-desc">
+        <p>
+          Bunga raya, atau Hibiscus rosa-sinensis, adalah pokok renek berbunga yang terkenal dengan bunga besar dan berwarna terang seperti merah, oren, kuning, atau putih serta daun hijau berkilat berbentuk bujur. Tumbuhan ini memerlukan cahaya matahari penuh, disiram secara sederhana untuk mengelakkan akar reput, dan tanah subur bersaliran baik dengan pH neutral.
+          Bunga raya digunakan sebagai tanaman hiasan, simbol bunga kebangsaan Malaysia, dan dalam perubatan tradisional untuk merawat demam serta luka kecil. Penjagaannya melibatkan pemangkasan berkala untuk menggalakkan pertumbuhan dan penambahan baja organik setiap beberapa bulan bagi menghasilkan bunga yang subur.
+        </p>
+      </div>
+    </div>
+  </div>
+  
+
+    <div class="section-title">MY PLANTS</div>
+
+    <div class="plants-grid">
+      <a href="plant-entry.html?plant=monstera" class="plant-card">
+        <img src="monstera.jpg" alt="Monstera">
+        <p>Monstera</p>
+      </a>
+      <a href="plant-entry.html?plant=deliciosa" class="plant-card">
+        <img src="deliciosa.jpg" alt="Deliciosa">
+        <p>Deliciosa</p>
+      </a>
+      <a href="plant-entry.html?plant=sansevieria" class="plant-card">
+        <img src="sansevieria.jpg" alt="Sansevieria">
+        <p>Sansevieria Plant</p>
+      </a>
+    </div>
+  </div>
+  <button onclick="openAddPlantModal()" class="add-plant-btn">
+    Add a new plant <span class="plus-icon">＋</span>
+  </button>  
+<!-- Add New Plant Modal -->
+<div id="addPlantModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p>Share details about your new plant.</p>
+        <button class="close-btn" onclick="closeAddPlantModal()">←</button>
+      </div>
+      <form id="newPlantForm">
+        <input type="text" placeholder="Aktiviti ..." required>
+        <input type="text" placeholder="Pemerhatian ..." required>
+        <input type="text" placeholder="Nota ..." required>
+        <div class="upload-group">
+          <input type="file" accept="image/*" id="plantImageUpload">
+          <label for="plantImageUpload">Add to your post 🖼️</label>
+        </div>
+        <button type="submit" class="save-btn">Save</button>
+      </form>
+    </div>
+  </div>
+  
+  <style>
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .modal-content {
+      background: #26422f;
+      color: white;
+      border-radius: 20px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+  
+    .close-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  
+    form input[type="text"] {
+      padding: 0.7rem;
+      width: 100%;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+    }
+  
+    .upload-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--cream);
+      padding: 0.5rem;
+      border-radius: 10px;
+      color: #26422f;
+      font-weight: 600;
+    }
+  
+    .upload-group input {
+      display: none;
+    }
+  
+    .save-btn {
+      padding: 0.7rem;
+      width: 100%;
+      background-color: var(--cream);
+      color: #26422f;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  
+    .save-btn:hover {
+      background-color: #dadcc2;
+    }
+  </style>
+  
+  <script>
+    function openAddPlantModal() {
+      document.getElementById("addPlantModal").style.display = "flex";
+    }
+  
+    function closeAddPlantModal() {
+      document.getElementById("addPlantModal").style.display = "none";
+    }
+  
+    // Example submit handler
+    document.getElementById("newPlantForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Plant info saved! (you can connect to a real database next)");
+      closeAddPlantModal();
+    });
+  </script>
+  <script>
+    function searchPlantInfo() {
+      const input = document.getElementById("plantSearch").value.toLowerCase();
+      const infoBox = document.getElementById("plantInfo");
+  
+      if (input.includes("bunga raya") || input.includes("hibiscus")) {
+        infoBox.style.display = "block";
+      } else {
+        infoBox.style.display = "none";
+      }
+    }
+  </script>
+  
+</body>
+</html>
